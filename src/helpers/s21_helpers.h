@@ -27,8 +27,18 @@ static inline int s21_is_zero(s21_decimal dec) {
   return dec.bits[0] ? 0 : (dec.bits[1] ? 0 : (dec.bits[2] ? 0 : 1));
 }
 
+static inline int get_scale(s21_decimal v) {
+    return (v.bits[3] & SC) >> 16;
+}
+
+static inline void set_scale(s21_decimal *v, int scale) {
+    v->bits[3] &= ~SC;
+    v->bits[3] |= (scale << 16);
+}
+
 int s21_cmp_abs_withot_scale(s21_decimal left, s21_decimal right);
-void s21_align_scale(s21_decimal left, s21_decimal right);
-void s21_normalize(big_decimal src, s21_decimal res);
+void s21_align_scale(s21_decimal *left, s21_decimal *right);
+void s21_normalize(big_decimal src, s21_decimal *dst);
+void s21_expand(s21_decimal src, big_decimal *dst);
 
 #endif
