@@ -24,14 +24,14 @@ static inline void s21_set_sign(s21_decimal *dec) {
 }
 
 static inline int s21_is_zero(s21_decimal dec) {
-  return dec.bits[0] ? 0 : (dec.bits[1] ? 0 : (dec.bits[2] ? 0 : 1));
+  return (dec.bits[0] | dec.bits[1] |dec.bits[2]) == 0;
 }
 
-static inline int get_scale(s21_decimal v) {
+static inline int s21_get_scale(s21_decimal v) {
     return (v.bits[3] & SC) >> 16;
 }
 
-static inline void set_scale(s21_decimal *v, int scale) {
+static inline void s21_set_scale(s21_decimal *v, int scale) {
     v->bits[3] &= ~SC;
     v->bits[3] |= (scale << 16);
 }

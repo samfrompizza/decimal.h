@@ -4,7 +4,7 @@ int s21_cmp_abs_withot_scale(s21_decimal left, s21_decimal right) {
     int result = 0;
     for (int i = 2; i >= 0; --i) {
         if (left.bits[i] != right.bits[i]) {
-            result = (left.bits[i] > right.bits[i]) ? -1 : 1;
+            result = ((uint32_t)left.bits[i] > (uint32_t)right.bits[i]) ? -1 : 1;
             break;
         }
     }
@@ -23,5 +23,5 @@ void s21_expand(s21_decimal src, big_decimal *dst) {
     dst->bits[2] = (uint32_t)src.bits[2];
 
     dst->scale = (uint16_t)s21_get_scale(src);
-    dst->sign = (uint16_t)s21_get_sign(src);
+    dst->sign = s21_get_sign(src) ? 1 : 0;
 }
