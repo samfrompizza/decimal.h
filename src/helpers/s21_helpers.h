@@ -40,7 +40,7 @@ static inline int s21_larger_than_96(big_decimal src) {
     return (src.bits[3] | src.bits[4] | src.bits[5] | src.bits[6]) != 0;
 }
 
-int s21_cmp_abs_withot_scale(s21_decimal left, s21_decimal right);
+int s21_cmp_abs_without_scale(big_decimal left, big_decimal right);
 void s21_align_scale(big_decimal *left, big_decimal *right);
 int s21_normalize(big_decimal src, s21_decimal *dst);
 void s21_expand(s21_decimal src, big_decimal *dst);

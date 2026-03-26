@@ -1,10 +1,10 @@
 #include "s21_helpers.h"
 
-int s21_cmp_abs_withot_scale(s21_decimal left, s21_decimal right) {
+int s21_cmp_abs_without_scale(big_decimal left, big_decimal right) {
     int result = 0;
-    for (int i = 2; i >= 0; --i) {
+    for (int i = 6; i >= 0; --i) {
         if (left.bits[i] != right.bits[i]) {
-            result = ((uint32_t)left.bits[i] > (uint32_t)right.bits[i]) ? 1 : -1;
+            result = (left.bits[i] > right.bits[i]) ? 1 : -1;
             break;
         }
     }
