@@ -23,6 +23,7 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
         result->bits[2] = result->bits[2] << (value_scale - 1);
       }
     }
+    s21_truncate(*result, result);
   }
   return fl_finish;
 }
