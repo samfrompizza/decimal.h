@@ -1,9 +1,8 @@
 #ifndef S21_DECIMAL_H
 #define S21_DECIMAL_H
 
-typedef struct 
-{
-    int bits[4];
+typedef struct {
+  int bits[4];
 } s21_decimal;
 
 // arithmetic
@@ -16,7 +15,7 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 int s21_is_less(s21_decimal left, s21_decimal right);
 int s21_is_less_or_equal(s21_decimal left, s21_decimal right);
 int s21_is_greater(s21_decimal left, s21_decimal right);
-int s21_is_greater_or_equal(s21_decimal left , s21_decimal right);
+int s21_is_greater_or_equal(s21_decimal left, s21_decimal right);
 int s21_is_equal(s21_decimal left, s21_decimal right);
 int s21_is_not_equal(s21_decimal left, s21_decimal right);
 
