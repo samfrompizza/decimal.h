@@ -1,10 +1,6 @@
 #include "../s21_decimal.h"
 #include "../helpers/s21_helpers.h"
 
-int s21_round(s21_decimal value, s21_decimal *result) {
-
-}
-
 int s21_truncate(s21_decimal value, s21_decimal *result) {
     int fl_finish = 0;
     if (!result) fl_finish = 1;
