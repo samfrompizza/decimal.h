@@ -71,7 +71,7 @@ void s21_expand(s21_decimal src, big_decimal *dst) {
         dst->bits[0] = (uint32_t)src.bits[0];
         dst->bits[1] = (uint32_t)src.bits[1];
         dst->bits[2] = (uint32_t)src.bits[2];
-        dst->scale = (uint16_t)s21_get_scale(src);
+        dst->scale = s21_get_scale(src);
         dst->sign = s21_get_sign(src) ? 1 : 0;
     }
 }

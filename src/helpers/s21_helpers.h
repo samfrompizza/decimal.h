@@ -11,7 +11,7 @@
 
 typedef struct {
   uint64_t bits[7];
-  uint16_t scale;
+  int scale;
   uint16_t sign;
 } big_decimal;
 
