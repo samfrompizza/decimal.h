@@ -1,9 +1,9 @@
 #ifndef S21_HELPERS_H
 #define S21_HELPERS_H
 
-#include "../s21_decimal.h"
-
 #include <stdint.h>
+
+#include "../s21_decimal.h"
 
 #define MINUS 0x80000000
 #define SC 0x00ff0000
@@ -15,29 +15,25 @@ typedef struct {
   uint16_t sign;
 } big_decimal;
 
-static inline int s21_get_sign(s21_decimal dec) {
-  return dec.bits[3] & MINUS;
-}
+static inline int s21_get_sign(s21_decimal dec) { return dec.bits[3] & MINUS; }
 
-static inline void s21_set_sign(s21_decimal *dec) {
-  dec->bits[3] |= MINUS;
-}
+static inline void s21_set_sign(s21_decimal *dec) { dec->bits[3] |= MINUS; }
 
 static inline int s21_is_zero(s21_decimal dec) {
-  return (dec.bits[0] | dec.bits[1] |dec.bits[2]) == 0;
+  return (dec.bits[0] | dec.bits[1] | dec.bits[2]) == 0;
 }
 
 static inline int s21_get_scale(s21_decimal v) {
-    return (v.bits[3] & SC) >> 16;
+  return (v.bits[3] & SC) >> 16;
 }
 
 static inline void s21_set_scale(s21_decimal *v, int scale) {
-    v->bits[3] &= ~SC;
-    v->bits[3] |= (scale << 16);
+  v->bits[3] &= ~SC;
+  v->bits[3] |= (scale << 16);
 }
 
 static inline int s21_larger_than_96(big_decimal src) {
-    return (src.bits[3] | src.bits[4] | src.bits[5] | src.bits[6]) != 0;
+  return (src.bits[3] | src.bits[4] | src.bits[5] | src.bits[6]) != 0;
 }
 
 int s21_cmp_abs_without_scale(big_decimal left, big_decimal right);
