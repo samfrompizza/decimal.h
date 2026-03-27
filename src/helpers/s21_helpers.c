@@ -1,14 +1,14 @@
 #include "s21_helpers.h"
 
-int s21_cmp_abs_withot_scale(s21_decimal left, s21_decimal right) {
-  int result = 0;
-  for (int i = 2; i >= 0; --i) {
-    if (left.bits[i] != right.bits[i]) {
-      result = ((uint32_t)left.bits[i] > (uint32_t)right.bits[i]) ? 1 : -1;
-      break;
+int s21_cmp_abs_without_scale(big_decimal left, big_decimal right) {
+    int result = 0;
+    for (int i = 6; i >= 0; --i) {
+        if (left.bits[i] != right.bits[i]) {
+            result = (left.bits[i] > right.bits[i]) ? 1 : -1;
+            break;
+        }
     }
-  }
-  return result;
+    return result;
 }
 
 void s21_align_scale(big_decimal *left, big_decimal *right) {
@@ -47,36 +47,34 @@ int s21_normalize(big_decimal src, s21_decimal *dst) {
     }
   }
   if (src.scale < 0) {
-    if (src.sign)
-      res = 2;
-    else
-      res = 1;
-  }
-
-  for (int i = 0; i < 4; i++) {
-    dst->bits[i] = 0;
-  }
-  dst->bits[0] = (uint32_t)src.bits[0];
-  dst->bits[1] = (uint32_t)src.bits[1];
-  dst->bits[2] = (uint32_t)src.bits[2];
-  s21_set_scale(dst, src.scale);
-  if (src.sign == 1) {
-    s21_set_sign(dst);
+    if (src.sign) res = 2;
+    else res = 1;
+  } else {
+    for (int i = 0; i < 4; i++) {
+        dst->bits[i] = 0;
+    }
+    dst->bits[0] = (uint32_t)src.bits[0];
+    dst->bits[1] = (uint32_t)src.bits[1];
+    dst->bits[2] = (uint32_t)src.bits[2];
+    s21_set_scale(dst, src.scale);
+    if (src.sign == 1) {
+        s21_set_sign(dst);
+    }
   }
   return res;
 }
 
 void s21_expand(s21_decimal src, big_decimal *dst) {
-  if (dst) {
-    for (int i = 0; i < 7; ++i) {
-      dst->bits[i] = 0;
+    if (dst) {
+        for (int i = 0; i < 7; ++i) {
+            dst->bits[i] = 0;
+        }
+        dst->bits[0] = (uint32_t)src.bits[0];
+        dst->bits[1] = (uint32_t)src.bits[1];
+        dst->bits[2] = (uint32_t)src.bits[2];
+        dst->scale = s21_get_scale(src);
+        dst->sign = s21_get_sign(src) ? 1 : 0;
     }
-    dst->bits[0] = (uint32_t)src.bits[0];
-    dst->bits[1] = (uint32_t)src.bits[1];
-    dst->bits[2] = (uint32_t)src.bits[2];
-    dst->scale = (uint16_t)s21_get_scale(src);
-    dst->sign = s21_get_sign(src) ? 1 : 0;
-  }
 }
 
 void s21_multiply_by_10(big_decimal *v) {
