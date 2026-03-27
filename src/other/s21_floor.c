@@ -14,12 +14,11 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
     if (s21_get_scale(value) == 0) {
       *result = value;
     } else {
-      int rem = 0;
       big_decimal tmp;
       s21_expand(value, &tmp);
 
       while (tmp.scale > 0) {
-        rem = s21_div_by_10(&tmp);
+        s21_div_by_10(&tmp);
         tmp.scale--;
       }
 
