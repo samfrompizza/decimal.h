@@ -1,6 +1,7 @@
+#include <limits.h>
+
 #include "../helpers/s21_helpers.h"
 #include "../s21_decimal.h"
-#include <limits.h>
 
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
   if (!dst) return 1;
