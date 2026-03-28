@@ -48,6 +48,10 @@ void s21_multiply_by_10(big_decimal *v);
 uint32_t s21_div_by_10(big_decimal *v);
 void s21_add_1(big_decimal *v);
 
+int s21_mul10_96(s21_decimal *d);
+uint32_t s21_div10_96(s21_decimal *d);
+int s21_add1_96(s21_decimal *d);
+
 void s21_add_mantissa(big_decimal value_1, big_decimal value_2, big_decimal *result);
 void s21_sub_mantissa(big_decimal value_1, big_decimal value_2, big_decimal *result);
 #endif

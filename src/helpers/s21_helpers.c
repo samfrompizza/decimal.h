@@ -107,6 +107,36 @@ void s21_add_1(big_decimal *v) {
   }
 }
 
+int s21_mul10_96(s21_decimal *d) {
+  uint64_t carry = 0;
+  for (int i = 0; i < 3; ++i) {
+    uint64_t cur = (uint64_t)(uint32_t)d->bits[i] * 10u + carry;
+    d->bits[i] = (int)(cur & 0xFFFFFFFFu);
+    carry = cur >> 32;
+  }
+  return carry != 0;
+}
+
+uint32_t s21_div10_96(s21_decimal *d) {
+  uint64_t rem = 0;
+  for (int i = 2; i >= 0; --i) {
+    uint64_t cur = (rem << 32) | (uint32_t)d->bits[i];
+    d->bits[i] = (int)(cur / 10u);
+    rem = cur % 10u;
+  }
+  return (uint32_t)rem;
+}
+
+int s21_add1_96(s21_decimal *d) {
+  uint64_t carry = 1;
+  for (int i = 0; i < 3 && carry; ++i) {
+    uint64_t cur = (uint64_t)(uint32_t)d->bits[i] + carry;
+    d->bits[i] = (int)(cur & 0xFFFFFFFFu);
+    carry = cur >> 32;
+  }
+  return carry != 0;
+}
+
 void s21_add_mantissa(big_decimal value_1, big_decimal value_2, big_decimal *result) {
     uint64_t carry = 0;
     for (int i = 0; i < 7; i++) result->bits[i] = 0;
