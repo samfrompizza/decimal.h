@@ -8,6 +8,9 @@
 #define MINUS 0x80000000
 #define SC 0x00ff0000
 #define MAX4BITE 0xffffffff
+#define S21_MAX_DECIMAL_LD 79228162514264337593543950335.0L
+#define S21_MIN_FLOAT_DECIMAL_LD 1e-28L
+#define BUF 128
 
 typedef struct {
   uint64_t bits[7];
