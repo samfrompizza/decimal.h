@@ -7,7 +7,7 @@ int s21_is_less(s21_decimal left, s21_decimal right) {
     else {
         int sign_l = s21_get_sign(left);
         int sign_r = s21_get_sign(right);
-        if (sign_l < sign_r) res = 0;
+        if (sign_l > sign_r) res = 0;
         else if (sign_l == sign_r) {
             big_decimal big_left, big_right;
             s21_expand(left, &big_left);
