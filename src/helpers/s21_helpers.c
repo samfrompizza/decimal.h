@@ -106,3 +106,26 @@ void s21_add_1(big_decimal *v) {
     carry = res >> 32;
   }
 }
+
+void s21_add_mantissa(big_decimal value_1, big_decimal value_2, big_decimal *result) {
+    uint64_t carry = 0;
+    for (int i = 0; i < 7; i++) result->bits[i] = 0;
+    for (int i = 0; i < 7; i++) {
+        uint64_t big_sum = value_1.bits[i] + value_2.bits[i] + carry;
+        result->bits[i] = big_sum & MAX4BITE;
+        carry = big_sum >> 32;
+    }
+}
+
+void s21_sub_mantissa(big_decimal value_1, big_decimal value_2, big_decimal *result) {
+    int borrow = 0;
+    for (int i = 0; i < 7; i++) result->bits[i] = 0;
+    for (int i = 0; i < 7; i++) {
+        int64_t diff = (int64_t)value_1.bits[i] - (int64_t)value_2.bits[i] - borrow;
+        if (diff < 0) {
+            diff += (1LL << 32);
+            borrow = 1;
+        } else borrow = 0;
+        result->bits[i] = diff & MAX4BITE;
+    }
+}
