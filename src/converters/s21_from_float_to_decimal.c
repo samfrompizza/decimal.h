@@ -1,8 +1,8 @@
-#include "../helpers/s21_helpers.h"
-#include "../s21_decimal.h"
-
 #include <math.h>
 #include <stdint.h>
+
+#include "../helpers/s21_helpers.h"
+#include "../s21_decimal.h"
 
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
   if (!dst) return 1;
