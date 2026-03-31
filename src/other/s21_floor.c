@@ -18,15 +18,18 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
       big_decimal tmp;
       s21_expand(value, &tmp);
 
+      int add = 0;
       while (tmp.scale > 0) {
         rem = s21_div_by_10(&tmp);
+        if (rem != 0) {
+          add++;
+        }
         tmp.scale--;
       }
 
-      if (tmp.sign != 0 && rem != 0) {
+      if (tmp.sign != 0 && add != 0) {
         s21_add_1(&tmp);
       }
-      s21_truncate(*result, result);
 
       result->bits[0] = (uint32_t)tmp.bits[0];
       result->bits[1] = (uint32_t)tmp.bits[1];
@@ -34,6 +37,7 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
       if (tmp.sign) {
         s21_set_sign(result);
       }
+      s21_truncate(*result, result);
     }
   }
 
