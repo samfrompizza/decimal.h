@@ -2,6 +2,7 @@
 #define S21_HELPERS_H
 
 #include <stdint.h>
+#include <stdio.h>
 
 #include "../s21_decimal.h"
 
@@ -56,4 +57,6 @@ void s21_add_mantissa(big_decimal value_1, big_decimal value_2,
                       big_decimal *result);
 void s21_sub_mantissa(big_decimal value_1, big_decimal value_2,
                       big_decimal *result);
+
+void s21_print_decimal_bits(s21_decimal dec);
 #endif

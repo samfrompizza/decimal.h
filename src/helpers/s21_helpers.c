@@ -162,3 +162,7 @@ void s21_sub_mantissa(big_decimal value_1, big_decimal value_2,
     result->bits[i] = diff & MAX4BITE;
   }
 }
+
+void s21_print_decimal_bits(s21_decimal dec) {
+  printf("Decimal bits: %x %x %x %x", dec.bits[0], dec.bits[1], dec.bits[2], dec.bits[3]);
+}
