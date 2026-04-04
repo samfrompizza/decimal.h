@@ -37,7 +37,6 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
       if (tmp.sign) {
         s21_set_sign(result);
       }
-      s21_truncate(*result, result);
     }
   }
 
