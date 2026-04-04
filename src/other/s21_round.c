@@ -20,8 +20,7 @@ int s21_round(s21_decimal value, s21_decimal *result) {
         rem = s21_div_by_10(&big_value);
         big_value.scale--;
       }
-      if (rem >= 5)
-        s21_add_1(&big_value);
+      if (rem >= 5) s21_add_1(&big_value);
 
       result->bits[0] = (uint32_t)big_value.bits[0];
       result->bits[1] = (uint32_t)big_value.bits[1];

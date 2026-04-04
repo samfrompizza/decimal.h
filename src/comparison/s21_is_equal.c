@@ -14,8 +14,7 @@ int s21_is_equal(s21_decimal left, s21_decimal right) {
       s21_expand(right, &big_right);
       s21_align_scale(&big_left, &big_right);
       int compare = s21_cmp_abs_without_scale(big_left, big_right);
-      if (compare == 0)
-        res = 1;
+      if (compare == 0) res = 1;
     }
   }
   return res;

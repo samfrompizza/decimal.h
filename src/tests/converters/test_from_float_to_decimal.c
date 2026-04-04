@@ -1,6 +1,5 @@
-#include <float.h>
-
 #include <check.h>
+#include <float.h>
 
 #include "../../s21_decimal.h"
 

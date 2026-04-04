@@ -3,7 +3,7 @@
 #include "../../s21_decimal.h"
 
 START_TEST(truncate_positive_fraction) {
-  s21_decimal src = {{299, 0, 0, 0x00020000}}; // 2.99
+  s21_decimal src = {{299, 0, 0, 0x00020000}};  // 2.99
   s21_decimal res = {{0}};
   ck_assert_int_eq(s21_truncate(src, &res), 0);
   ck_assert_int_eq(res.bits[0], 2);
@@ -12,7 +12,7 @@ START_TEST(truncate_positive_fraction) {
 END_TEST
 
 START_TEST(truncate_negative_fraction) {
-  s21_decimal src = {{299, 0, 0, 0x80020000}}; // -2.99
+  s21_decimal src = {{299, 0, 0, 0x80020000}};  // -2.99
   s21_decimal res = {{0}};
   ck_assert_int_eq(s21_truncate(src, &res), 0);
   ck_assert_int_eq(res.bits[0], 2);

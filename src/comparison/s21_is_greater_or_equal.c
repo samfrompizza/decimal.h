@@ -3,7 +3,6 @@
 
 int s21_is_greater_or_equal(s21_decimal left, s21_decimal right) {
   int res = 0;
-  if (!s21_is_less(left, right))
-    res = 1;
+  if (!s21_is_less(left, right)) res = 1;
   return res;
 }
