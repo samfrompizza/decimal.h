@@ -3,7 +3,7 @@
 
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   if (!result)
-    return 1;
+    return 0;
 
   if (s21_is_zero(value_2))
     return 3;

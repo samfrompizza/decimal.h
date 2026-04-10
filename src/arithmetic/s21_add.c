@@ -3,7 +3,7 @@
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   if (!result)
-    return 1;
+    return 0;
 
   for (int i = 0; i < 4; i++)
     result->bits[i] = 0;
