@@ -5,6 +5,8 @@
 
 Suite *s21_add_test(void);
 Suite *s21_sub_test(void);
+Suite *s21_mul_test(void);
+Suite *s21_div_test(void);
 
 Suite *s21_is_less_test(void);
 Suite *s21_is_less_or_equal_test(void);

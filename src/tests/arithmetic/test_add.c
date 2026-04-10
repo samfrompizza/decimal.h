@@ -16,8 +16,8 @@ START_TEST(add_simple_positive) {
 END_TEST
 
 START_TEST(add_different_scales) {
-  s21_decimal a = {{15, 0, 0, 0x00010000}};  // 1.5
-  s21_decimal b = {{225, 0, 0, 0x00020000}}; // 2.25
+  s21_decimal a = {{15, 0, 0, 0x00010000}};   // 1.5
+  s21_decimal b = {{225, 0, 0, 0x00020000}};  // 2.25
   s21_decimal res = {{0}};
 
   ck_assert_int_eq(s21_add(a, b, &res), 0);
@@ -45,6 +45,40 @@ START_TEST(add_overflow_positive) {
 }
 END_TEST
 
+START_TEST(add_large_scale_normalization) {
+  s21_decimal a = {{1, 0, 0, 0x001C0000}};  // 1e-28
+  s21_decimal b = {{9, 0, 0, 0x001C0000}};  // 9e-28
+  s21_decimal res = {{0}};
+
+  ck_assert_int_eq(s21_add(a, b, &res), 0);
+  ck_assert_int_eq(res.bits[0], 10);
+  ck_assert_int_eq((res.bits[3] & 0x00FF0000), 0x001C0000);
+}
+END_TEST
+
+START_TEST(add_negative_numbers) {
+  s21_decimal a = {{500, 0, 0, 0x80000000}};  // -500
+  s21_decimal b = {{100, 0, 0, 0x80000000}};  // -100
+  s21_decimal res = {{0}};
+
+  ck_assert_int_eq(s21_add(a, b, &res), 0);
+  ck_assert_int_eq(res.bits[0], 600);
+  ck_assert_int_eq((res.bits[3] & 0x80000000) != 0, 1);
+}
+END_TEST
+
+START_TEST(add_carry_to_middle_word) {
+  s21_decimal a = {{0xFFFFFFFF, 0, 0, 0}};
+  s21_decimal b = {{1, 0, 0, 0}};
+  s21_decimal res = {{0}};
+
+  ck_assert_int_eq(s21_add(a, b, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 1);
+  ck_assert_int_eq(res.bits[2], 0);
+}
+END_TEST
+
 START_TEST(add_null_result_returns_error) {
   s21_decimal a = {{1, 0, 0, 0}};
   s21_decimal b = {{1, 0, 0, 0}};
@@ -60,6 +94,9 @@ Suite *s21_add_test(void) {
   tcase_add_test(tc, add_different_scales);
   tcase_add_test(tc, add_opposite_signs_cancel);
   tcase_add_test(tc, add_overflow_positive);
+  tcase_add_test(tc, add_large_scale_normalization);
+  tcase_add_test(tc, add_negative_numbers);
+  tcase_add_test(tc, add_carry_to_middle_word);
   tcase_add_test(tc, add_null_result_returns_error);
   suite_add_tcase(suite, tc);
 

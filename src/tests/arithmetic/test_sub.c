@@ -25,13 +25,46 @@ START_TEST(sub_negative_result) {
 END_TEST
 
 START_TEST(sub_different_scales) {
-  s21_decimal a = {{100, 0, 0, 0x00010000}}; // 10.0
-  s21_decimal b = {{25, 0, 0, 0x00010000}};  // 2.5
+  s21_decimal a = {{100, 0, 0, 0x00010000}};  // 10.0
+  s21_decimal b = {{25, 0, 0, 0x00010000}};   // 2.5
   s21_decimal res = {{0}};
 
   ck_assert_int_eq(s21_sub(a, b, &res), 0);
   ck_assert_int_eq(res.bits[0], 75);
   ck_assert_int_eq(res.bits[3], 0x00010000);
+}
+END_TEST
+
+START_TEST(sub_with_negative_operand) {
+  s21_decimal a = {{50, 0, 0, 0}};          // 50
+  s21_decimal b = {{25, 0, 0, 0x80000000}}; // -25
+  s21_decimal res = {{0}};
+
+  ck_assert_int_eq(s21_sub(a, b, &res), 0);
+  ck_assert_int_eq(res.bits[0], 75);
+  ck_assert_int_eq(res.bits[3], 0);
+}
+END_TEST
+
+START_TEST(sub_to_zero_result) {
+  s21_decimal a = {{777, 0, 0, 0x00020000}};
+  s21_decimal b = {{777, 0, 0, 0x00020000}};
+  s21_decimal res = {{0}};
+
+  ck_assert_int_eq(s21_sub(a, b, &res), 0);
+  ck_assert_int_eq(s21_is_equal(res, (s21_decimal){{0, 0, 0, 0}}), 1);
+}
+END_TEST
+
+START_TEST(sub_borrow_from_middle_word) {
+  s21_decimal a = {{0, 1, 0, 0}};
+  s21_decimal b = {{1, 0, 0, 0}};
+  s21_decimal res = {{0}};
+
+  ck_assert_int_eq(s21_sub(a, b, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0xFFFFFFFF);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
 }
 END_TEST
 
@@ -59,6 +92,9 @@ Suite *s21_sub_test(void) {
   tcase_add_test(tc, sub_simple_positive);
   tcase_add_test(tc, sub_negative_result);
   tcase_add_test(tc, sub_different_scales);
+  tcase_add_test(tc, sub_with_negative_operand);
+  tcase_add_test(tc, sub_to_zero_result);
+  tcase_add_test(tc, sub_borrow_from_middle_word);
   tcase_add_test(tc, sub_overflow_negative);
   tcase_add_test(tc, sub_null_result_returns_error);
   suite_add_tcase(suite, tc);
