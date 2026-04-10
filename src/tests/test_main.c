@@ -6,6 +6,8 @@ int main(void) {
   Suite *suites[] = {
       s21_add_test(),
       s21_sub_test(),
+      s21_mul_test(),
+      s21_div_test(),
       s21_is_less_test(),
       s21_is_less_or_equal_test(),
       s21_is_greater_test(),
