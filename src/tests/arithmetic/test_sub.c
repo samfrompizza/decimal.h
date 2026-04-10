@@ -1,6 +1,7 @@
 #include <check.h>
 
 #include "../../s21_decimal.h"
+#include "../../helpers/s21_helpers.h"
 
 START_TEST(sub_simple_positive) {
   s21_decimal a = {{100, 0, 0, 0}};
@@ -62,7 +63,7 @@ START_TEST(sub_borrow_from_middle_word) {
   s21_decimal res = {{0}};
 
   ck_assert_int_eq(s21_sub(a, b, &res), 0);
-  ck_assert_int_eq(res.bits[0], 0xFFFFFFFF);
+  ck_assert_int_eq((unsigned)res.bits[0], 0xFFFFFFFF);
   ck_assert_int_eq(res.bits[1], 0);
   ck_assert_int_eq(res.bits[2], 0);
 }
