@@ -78,8 +78,7 @@ START_TEST(float_to_decimal_normalize_up_and_mul10) {
   ck_assert_int_eq(s21_from_float_to_decimal(12345678.0f, &dst), 0);
   ck_assert_int_eq(dec_sign(dst), 0);
   ck_assert_int_eq(dec_scale(dst), 0);
-  s21_print_decimal_bits(dst);
-  //ck_assert_int_eq(dst.bits[0], 1234568);
+  ck_assert_int_eq(dst.bits[0], 12345680);
 }
 END_TEST
 
