@@ -51,8 +51,6 @@ int s21_normalize(big_decimal src, s21_decimal *dst) {
       res = 2;
     else
       res = 1;
-  } else if (s21_is_zero_big(src) && (rem > 0 || nums_fl)) {
-    res = 2;
   } else {
     for (int i = 0; i < 4; i++) {
       dst->bits[i] = 0;
