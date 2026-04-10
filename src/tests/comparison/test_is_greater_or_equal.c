@@ -10,8 +10,8 @@ START_TEST(greater_or_equal_true_for_greater) {
 END_TEST
 
 START_TEST(greater_or_equal_true_for_equal) {
-  s21_decimal a = {{1230, 0, 0, 0x00020000}};  // 12.30
-  s21_decimal b = {{123, 0, 0, 0x00010000}};   // 12.3
+  s21_decimal a = {{1230, 0, 0, 0x00020000}}; // 12.30
+  s21_decimal b = {{123, 0, 0, 0x00010000}};  // 12.3
   ck_assert_int_eq(s21_is_greater_or_equal(a, b), 1);
 }
 END_TEST

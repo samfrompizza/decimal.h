@@ -4,7 +4,7 @@
 #include "../../s21_decimal.h"
 
 START_TEST(decimal_to_int_positive_with_fraction) {
-  s21_decimal src = {{1239, 0, 0, 0x00010000}};  // 123.9
+  s21_decimal src = {{1239, 0, 0, 0x00010000}}; // 123.9
   int dst = 0;
   ck_assert_int_eq(s21_from_decimal_to_int(src, &dst), 0);
   ck_assert_int_eq(dst, 123);
@@ -12,7 +12,7 @@ START_TEST(decimal_to_int_positive_with_fraction) {
 END_TEST
 
 START_TEST(decimal_to_int_negative_with_fraction) {
-  s21_decimal src = {{1239, 0, 0, 0x80010000}};  // -123.9
+  s21_decimal src = {{1239, 0, 0, 0x80010000}}; // -123.9
   int dst = 0;
   ck_assert_int_eq(s21_from_decimal_to_int(src, &dst), 0);
   ck_assert_int_eq(dst, -123);

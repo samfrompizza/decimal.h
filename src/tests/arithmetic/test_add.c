@@ -16,8 +16,8 @@ START_TEST(add_simple_positive) {
 END_TEST
 
 START_TEST(add_different_scales) {
-  s21_decimal a = {{15, 0, 0, 0x00010000}};   // 1.5
-  s21_decimal b = {{225, 0, 0, 0x00020000}};  // 2.25
+  s21_decimal a = {{15, 0, 0, 0x00010000}};  // 1.5
+  s21_decimal b = {{225, 0, 0, 0x00020000}}; // 2.25
   s21_decimal res = {{0}};
 
   ck_assert_int_eq(s21_add(a, b, &res), 0);
