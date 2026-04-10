@@ -27,6 +27,11 @@ static inline int s21_is_zero(s21_decimal dec) {
   return (dec.bits[0] | dec.bits[1] | dec.bits[2]) == 0;
 }
 
+static inline int s21_is_zero_big(big_decimal dec) {
+  return (dec.bits[0] | dec.bits[1] | dec.bits[2] | dec.bits[3] | dec.bits[4] |
+          dec.bits[5] | dec.bits[6]) == 0;
+}
+
 static inline int s21_get_scale(s21_decimal v) {
   return (v.bits[3] & SC) >> 16;
 }
@@ -53,10 +58,18 @@ int s21_mul10_96(s21_decimal *d);
 uint32_t s21_div10_96(s21_decimal *d);
 int s21_add1_96(s21_decimal *d);
 
+void s21_shift_left(big_decimal *dec);
+
 void s21_add_mantissa(big_decimal value_1, big_decimal value_2,
                       big_decimal *result);
 void s21_sub_mantissa(big_decimal value_1, big_decimal value_2,
                       big_decimal *result);
+
+void s21_mul_mantissa(big_decimal value_1, big_decimal value_2,
+                      big_decimal *result);
+
+void s21_div_mantissa(big_decimal value_1, big_decimal value_2,
+                      big_decimal *result, big_decimal *remainder);
 
 void s21_print_decimal_bits(s21_decimal dec);
 #endif

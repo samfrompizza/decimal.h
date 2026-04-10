@@ -10,8 +10,8 @@ START_TEST(less_or_equal_true_for_less) {
 END_TEST
 
 START_TEST(less_or_equal_true_for_equal) {
-  s21_decimal a = {{50, 0, 0, 0x00010000}};   // 5.0
-  s21_decimal b = {{500, 0, 0, 0x00020000}};  // 5.00
+  s21_decimal a = {{50, 0, 0, 0x00010000}};  // 5.0
+  s21_decimal b = {{500, 0, 0, 0x00020000}}; // 5.00
   ck_assert_int_eq(s21_is_less_or_equal(a, b), 1);
 }
 END_TEST

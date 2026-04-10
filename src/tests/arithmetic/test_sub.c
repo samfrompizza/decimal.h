@@ -25,8 +25,8 @@ START_TEST(sub_negative_result) {
 END_TEST
 
 START_TEST(sub_different_scales) {
-  s21_decimal a = {{100, 0, 0, 0x00010000}};  // 10.0
-  s21_decimal b = {{25, 0, 0, 0x00010000}};   // 2.5
+  s21_decimal a = {{100, 0, 0, 0x00010000}}; // 10.0
+  s21_decimal b = {{25, 0, 0, 0x00010000}};  // 2.5
   s21_decimal res = {{0}};
 
   ck_assert_int_eq(s21_sub(a, b, &res), 0);
