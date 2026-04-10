@@ -1,7 +1,7 @@
 #include <check.h>
 
-#include "../../s21_decimal.h"
 #include "../../helpers/s21_helpers.h"
+#include "../../s21_decimal.h"
 
 START_TEST(sub_simple_positive) {
   s21_decimal a = {{100, 0, 0, 0}};
@@ -37,8 +37,8 @@ START_TEST(sub_different_scales) {
 END_TEST
 
 START_TEST(sub_with_negative_operand) {
-  s21_decimal a = {{50, 0, 0, 0}};          // 50
-  s21_decimal b = {{25, 0, 0, 0x80000000}}; // -25
+  s21_decimal a = {{50, 0, 0, 0}};           // 50
+  s21_decimal b = {{25, 0, 0, 0x80000000}};  // -25
   s21_decimal res = {{0}};
 
   ck_assert_int_eq(s21_sub(a, b, &res), 0);

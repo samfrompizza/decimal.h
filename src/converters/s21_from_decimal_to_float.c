@@ -5,19 +5,16 @@
 #include "../s21_decimal.h"
 
 int s21_from_decimal_to_float(s21_decimal src, float *dst) {
-  if (dst == NULL)
-    return 1;
+  if (dst == NULL) return 1;
 
   long double value = (long double)(uint32_t)src.bits[0] +
                       (long double)(uint32_t)src.bits[1] * powl(2, 32) +
                       (long double)(uint32_t)src.bits[2] * powl(2, 64);
   value /= powl(10, s21_get_scale(src));
-  if (s21_get_sign(src))
-    value = -value;
+  if (s21_get_sign(src)) value = -value;
 
   *dst = (float)value;
-  if (isnan(*dst) || isinf(*dst))
-    return 1;
+  if (isnan(*dst) || isinf(*dst)) return 1;
 
   return 0;
 }

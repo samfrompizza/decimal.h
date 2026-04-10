@@ -10,8 +10,8 @@ START_TEST(equal_same_value_and_scale) {
 END_TEST
 
 START_TEST(equal_same_value_different_scale) {
-  s21_decimal a = {{10, 0, 0, 0x00010000}};  // 1.0
-  s21_decimal b = {{100, 0, 0, 0x00020000}}; // 1.00
+  s21_decimal a = {{10, 0, 0, 0x00010000}};   // 1.0
+  s21_decimal b = {{100, 0, 0, 0x00020000}};  // 1.00
   ck_assert_int_eq(s21_is_equal(a, b), 1);
 }
 END_TEST

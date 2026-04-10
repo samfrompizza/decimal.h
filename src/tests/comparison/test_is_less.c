@@ -24,8 +24,8 @@ START_TEST(less_both_negative) {
 END_TEST
 
 START_TEST(less_equivalent_scales) {
-  s21_decimal a = {{100, 0, 0, 0x00020000}}; // 1.00
-  s21_decimal b = {{1, 0, 0, 0}};            // 1
+  s21_decimal a = {{100, 0, 0, 0x00020000}};  // 1.00
+  s21_decimal b = {{1, 0, 0, 0}};             // 1
   ck_assert_int_eq(s21_is_less(a, b), 0);
 }
 END_TEST

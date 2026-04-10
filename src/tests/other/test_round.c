@@ -3,7 +3,7 @@
 #include "../../s21_decimal.h"
 
 START_TEST(round_positive_down) {
-  s21_decimal src = {{24, 0, 0, 0x00010000}}; // 2.4
+  s21_decimal src = {{24, 0, 0, 0x00010000}};  // 2.4
   s21_decimal res = {{0}};
   ck_assert_int_eq(s21_round(src, &res), 0);
   ck_assert_int_eq(res.bits[0], 2);
@@ -11,7 +11,7 @@ START_TEST(round_positive_down) {
 END_TEST
 
 START_TEST(round_positive_up) {
-  s21_decimal src = {{25, 0, 0, 0x00010000}}; // 2.5
+  s21_decimal src = {{25, 0, 0, 0x00010000}};  // 2.5
   s21_decimal res = {{0}};
   ck_assert_int_eq(s21_round(src, &res), 0);
   ck_assert_int_eq(res.bits[0], 3);
@@ -19,7 +19,7 @@ START_TEST(round_positive_up) {
 END_TEST
 
 START_TEST(round_negative_half) {
-  s21_decimal src = {{25, 0, 0, 0x80010000}}; // -2.5
+  s21_decimal src = {{25, 0, 0, 0x80010000}};  // -2.5
   s21_decimal res = {{0}};
   ck_assert_int_eq(s21_round(src, &res), 0);
   ck_assert_int_eq(res.bits[0], 3);

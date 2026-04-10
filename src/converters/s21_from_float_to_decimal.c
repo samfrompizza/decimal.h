@@ -89,22 +89,17 @@ static void s21_strip_trailing_zeros(s21_decimal *dst, int *scale) {
 }
 
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
-  if (!dst)
-    return 1;
+  if (!dst) return 1;
 
   s21_clear_decimal(dst);
 
-  if (isnan(src) || isinf(src))
-    return 1;
-  if (src == 0.0f)
-    return 0;
+  if (isnan(src) || isinf(src)) return 1;
+  if (src == 0.0f) return 0;
 
   long double x = fabsl((long double)src);
 
-  if (x > 0.0L && x < S21_MIN_FLOAT_DECIMAL_LD)
-    return 1;
-  if (x > S21_MAX_DECIMAL_LD)
-    return 1;
+  if (x > 0.0L && x < S21_MIN_FLOAT_DECIMAL_LD) return 1;
+  if (x > S21_MAX_DECIMAL_LD) return 1;
 
   int sign = (src < 0.0f);
 
@@ -129,8 +124,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
   s21_strip_trailing_zeros(dst, &scale);
 
   s21_set_scale(dst, scale);
-  if (sign)
-    s21_set_sign(dst);
+  if (sign) s21_set_sign(dst);
 
   return 0;
 }

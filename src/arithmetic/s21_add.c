@@ -2,16 +2,13 @@
 #include "../s21_decimal.h"
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
-  if (!result)
-    return 1;
+  if (!result) return 1;
 
-  for (int i = 0; i < 4; i++)
-    result->bits[i] = 0;
+  for (int i = 0; i < 4; i++) result->bits[i] = 0;
   int sign_1 = s21_get_sign(value_1);
   int sign_2 = s21_get_sign(value_2);
   big_decimal big_value_1, big_value_2, big_res;
-  for (int i = 0; i < 7; i++)
-    big_res.bits[i] = 0;
+  for (int i = 0; i < 7; i++) big_res.bits[i] = 0;
   s21_expand(value_1, &big_value_1);
   s21_expand(value_2, &big_value_2);
   s21_align_scale(&big_value_1, &big_value_2);
